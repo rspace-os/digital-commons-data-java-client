@@ -1,4 +1,4 @@
-package com.researchspace.dcd;
+package com.researchspace.dcd.client;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

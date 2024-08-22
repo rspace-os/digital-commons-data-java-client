@@ -1,5 +1,8 @@
 package com.researchspace.dcd.client;
 
+import static com.researchspace.dcd.utils.DigitalCommonsDataUtils.getApiBaseUrl;
+import static com.researchspace.dcd.utils.DigitalCommonsDataUtils.getUploadBaseUrl;
+
 import com.researchspace.dcd.model.DigitalCommonDataSubmission;
 import com.researchspace.dcd.model.DigitalCommonsDataBindingRequest;
 import com.researchspace.dcd.model.DigitalCommonsDataBindingResponse;
@@ -8,7 +11,6 @@ import com.researchspace.dcd.model.DigitalCommonsDataDatasetCreationRequest;
 import com.researchspace.dcd.model.DigitalCommonsDataFile;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import lombok.Getter;
@@ -28,27 +30,17 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 public class DigitalCommonsDataClientImpl implements DigitalCommonsDataClient {
 
-  private final URL webUrlBase;
-  private final URL apiUrlBase;
-  private final URL uploadUrlBase;
+  private final String apiUrlBase;
+  private final String uploadUrlBase;
   private final String token;
   private RestTemplate restTemplate;
 
   @SneakyThrows
   public DigitalCommonsDataClientImpl(URL webUrlBase, String token) {
-    this.webUrlBase = webUrlBase;
-    this.apiUrlBase = getApiBaseUrl(this.webUrlBase.toString());
-    this.uploadUrlBase = getUploadBaseUrl(this.webUrlBase.toString());
+    this.apiUrlBase = getApiBaseUrl(webUrlBase.toString());
+    this.uploadUrlBase = getUploadBaseUrl(webUrlBase.toString());
     this.token = token;
     this.restTemplate = new RestTemplate();
-  }
-
-  private URL getApiBaseUrl(String baseUrl) throws MalformedURLException {
-    return new URL(baseUrl.replace("://", "://api."));
-  }
-
-  private URL getUploadBaseUrl(String baseUrl) throws MalformedURLException {
-    return new URL(baseUrl.replace("://", "://uploads."));
   }
 
   @Override

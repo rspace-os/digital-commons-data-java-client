@@ -1,4 +1,4 @@
-package com.researchspace.dcd;
+package com.researchspace.dcd.client;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;

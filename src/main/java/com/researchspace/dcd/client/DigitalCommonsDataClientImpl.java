@@ -53,12 +53,14 @@ public class DigitalCommonsDataClientImpl implements DigitalCommonsDataClient {
     } catch (HttpClientErrorException clientEx) {
       if (expectedMsg.equals(clientEx.getMessage())) {
         return Boolean.TRUE;
+      } else {
+        return Boolean.FALSE;
       }
     } catch (Exception e) {
       log.error("Couldn't perform test action {}", e.getMessage());
       return Boolean.FALSE;
     }
-    return Boolean.FALSE;
+    return Boolean.TRUE;
   }
 
   @Override

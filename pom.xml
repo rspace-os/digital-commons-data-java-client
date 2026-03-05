@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>digital-commons-data-java-client</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
 
     <repositories>
         <repository>
@@ -128,7 +128,7 @@
         <dependency>
             <groupId>com.github.rspace-os</groupId>
             <artifactId>rda-dmp-common-standard</artifactId>
-            <version>0.0.5</version>
+            <version>0.1.2</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

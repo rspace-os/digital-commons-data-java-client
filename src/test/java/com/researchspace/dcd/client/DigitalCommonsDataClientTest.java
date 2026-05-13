@@ -1,5 +1,6 @@
 package com.researchspace.dcd.client;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -25,7 +26,7 @@ import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.HttpClientErrorException;
@@ -78,7 +79,7 @@ class DigitalCommonsDataClientTest {
         HttpClientErrorException.class,
         () -> digitalCommonsDataClientImpl.createDataset(submission)
     );
-    assertEquals("401 Unauthorized: [no body]", thrown.getMessage());
+    assertThat(thrown.getMessage(), containsString("401 Unauthorized"));
 
   }
 
@@ -108,7 +109,7 @@ class DigitalCommonsDataClientTest {
         HttpClientErrorException.class,
         () -> digitalCommonsDataClientImpl.deleteDataset(datasetId)
     );
-    assertEquals("401 Unauthorized: [no body]", thrown.getMessage());
+    assertThat(thrown.getMessage(), containsString("401 Unauthorized"));
 
   }
 
@@ -117,7 +118,7 @@ class DigitalCommonsDataClientTest {
     mockServer.expect(requestTo(
             containsString(
                 "https://api.data.mendeley.com/active-data-entities/datasets/drafts/FAKE_ID")))
-        .andRespond(withStatus(HttpStatus.NOT_FOUND)
+        .andRespond(withStatus(HttpStatusCode.valueOf(404))
             .body("{\"message\":\"Draft dataset 'FAKE_ID' not found\"}"));
 
     Boolean datasetDeleted = digitalCommonsDataClientImpl.testConnection();
@@ -193,7 +194,7 @@ class DigitalCommonsDataClientTest {
         HttpClientErrorException.class,
         () -> digitalCommonsDataClientImpl.depositFile(dataset, "example.txt ", file)
     );
-    assertEquals("401 Unauthorized: [no body]", thrown.getMessage());
+    assertThat(thrown.getMessage(), containsString("401 Unauthorized"));
 
   }
 

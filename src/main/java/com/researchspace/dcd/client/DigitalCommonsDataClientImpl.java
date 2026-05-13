@@ -46,12 +46,10 @@ public class DigitalCommonsDataClientImpl implements DigitalCommonsDataClient {
   @Override
   public Boolean testConnection() {
     final String FAKE_ID = "FAKE_ID";
-    String expectedMsg =
-				"404 Not Found: \"{\"message\":\"Draft dataset '" + FAKE_ID + "' not found\"}\"";
     try {
       deleteDataset(FAKE_ID);
     } catch (HttpClientErrorException clientEx) {
-      if (expectedMsg.equals(clientEx.getMessage())) {
+      if (clientEx.getStatusCode().value() == 404) {
         return Boolean.TRUE;
       } else {
         return Boolean.FALSE;

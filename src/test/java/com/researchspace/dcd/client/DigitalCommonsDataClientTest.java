@@ -137,6 +137,18 @@ class DigitalCommonsDataClientTest {
   }
 
   @Test
+  public void testIsConnectionNotOpenWhenUnrelated404() {
+    mockServer.expect(requestTo(
+            containsString(
+                "https://api.data.mendeley.com/active-data-entities/datasets/drafts/FAKE_ID")))
+        .andRespond(withStatus(HttpStatusCode.valueOf(404))
+            .body("{\"message\":\"Not Found\"}"));
+
+    Boolean datasetDeleted = digitalCommonsDataClientImpl.testConnection();
+    assertFalse(datasetDeleted);
+  }
+
+  @Test
   public void testDepositFileSucceed() throws IOException {
 
     String fileDepositResponse = IOUtils.resourceToString("/json/fileDepositResponse.json",

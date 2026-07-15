@@ -49,7 +49,8 @@ public class DigitalCommonsDataClientImpl implements DigitalCommonsDataClient {
     try {
       deleteDataset(FAKE_ID);
     } catch (HttpClientErrorException clientEx) {
-      if (clientEx.getStatusCode().value() == 404) {
+      if (clientEx.getStatusCode().value() == 404
+          && clientEx.getResponseBodyAsString().contains("not found")) {
         return Boolean.TRUE;
       } else {
         return Boolean.FALSE;

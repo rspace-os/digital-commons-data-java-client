@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.github.rspace-os</groupId>
         <artifactId>rspace-parent</artifactId>
-        <version>3.0.0</version>
+        <version>314e7a9f6f729d219c4157c73dffd8314233de82</version>
     </parent>
 
     <artifactId>digital-commons-data-java-client</artifactId>
@@ -80,7 +80,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.21</version>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -93,19 +93,23 @@
         <dependency>
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>
-        </dependency>
+          <scope>test</scope>
+    </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-migrationsupport</artifactId>
-        </dependency>
+          <scope>test</scope>
+    </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-        </dependency>
+      <version>4.13.2</version>
+          <scope>test</scope>
+    </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>1.7.21</version>
+            <version>${slf4j.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
